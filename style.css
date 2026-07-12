@@ -1,0 +1,96 @@
+
+:root {
+    --bg-dark: #0f1115;
+    --glass-bg: rgba(30, 32, 40, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.12);
+    --accent: #3b82f6; /* macOS Blue */
+    --accent-hover: #2563eb;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+
+body { background-color: var(--bg-dark); color: var(--text-main); height: 100vh; overflow: hidden; }
+
+/* Subtle blurred background mesh */
+.mesh-bg {
+    position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1), transparent 40%);
+    z-index: -1;
+}
+
+.app-layout { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+
+/* Frosted Glass Utilities */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-element {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+}
+
+/* Sidebar */
+.sidebar { border-right: 1px solid var(--glass-border); border-top: none; border-bottom: none; border-left: none; padding: 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
+
+.brand h2 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; }
+.mac-dots { display: flex; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.close { background: #ff5f56; }
+.dot.min { background: #ffbd2e; }
+.dot.max { background: #27c93f; }
+
+.nav-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; }
+.categories { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+.categories li { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-size: 0.9rem; font-weight: 500; }
+.categories li i { width: 18px; height: 18px; }
+.categories li:hover { background: var(--glass-highlight); color: var(--text-main); }
+.categories li.active { background: var(--accent); color: white; }
+
+/* Workspace */
+.workspace { display: flex; flex-direction: column; padding: 2rem; overflow-y: auto; }
+.topbar { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+
+.search-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; border-radius: 10px; width: 350px; }
+.search-bar i { color: var(--text-muted); width: 18px; }
+.search-bar input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 0.95rem; }
+
+/* Buttons */
+.primary-btn { background: var(--accent); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s; }
+.primary-btn:hover { background: var(--accent-hover); }
+.secondary-btn { background: transparent; color: var(--text-main); border: 1px solid var(--glass-border); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+.secondary-btn:hover { background: var(--glass-highlight); }
+.icon-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0.25rem; border-radius: 6px; transition: all 0.2s; }
+.icon-btn:hover { background: var(--glass-highlight); color: white; }
+
+/* Prompt Grid */
+.prompt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+.prompt-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: transform 0.2s, border-color 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.prompt-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.card-header h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.badge { background: rgba(255,255,255,0.1); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 500; color: var(--text-muted); }
+.card-body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; flex-grow: 1; display: -webkit-box;-webkit-line-clamp: 4; line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; font-family: monospace; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--glass-border); padding-top: 1rem; }
+
+/* Modal */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal { width: 100%; max-width: 500px; padding: 2rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); transform: translateY(20px); transition: transform 0.2s; }
+.modal-overlay.active .modal { transform: translateY(0); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: white; padding: 0.75rem; border-radius: 8px; outline: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+.form-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }

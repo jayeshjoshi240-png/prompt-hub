@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptHub | AI Library</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- macOS System Font approximation & Lucide Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Dynamic animated background -->
+    <div class="mesh-bg"></div>
+
+    <div class="app-layout">
+        <!-- Frosted Glass Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <div class="mac-dots">
+                    <span class="dot close"></span>
+                    <span class="dot min"></span>
+                    <span class="dot max"></span>
+                </div>
+                <h2>PromptHub</h2>
+            </div>
+
+            <nav class="categories">
+                <p class="nav-label">Categories</p>
+                <ul id="category-list">
+                    <li class="active" data-filter="All"><i data-lucide="layers"></i> All Prompts</li>
+                    <li data-filter="ChatGPT"><i data-lucide="message-square"></i> ChatGPT</li>
+                    <li data-filter="Midjourney"><i data-lucide="image"></i> Midjourney</li>
+                    <li data-filter="Coding"><i data-lucide="code"></i> Coding</li>
+                    <li data-filter="Writing"><i data-lucide="pen-tool"></i> Writing</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <header class="topbar">
+                <div class="search-bar glass-element">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="search-input" placeholder="Search your prompts...">
+                </div>
+                <button id="open-modal-btn" class="primary-btn">
+                    <i data-lucide="plus"></i> New Prompt
+                </button>
+            </header>
+
+            <div class="prompt-grid" id="prompt-grid">
+                <!-- Prompt cards injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- macOS Style Modal (Hidden by default) -->
+    <div class="modal-overlay" id="add-modal">
+        <div class="modal glass-panel">
+            <div class="modal-header">
+                <h3>Add New Prompt</h3>
+                <button id="close-modal-btn" class="icon-btn"><i data-lucide="x"></i></button>
+            </div>
+            <form id="prompt-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="prompt-title" required placeholder="e.g., Python Code Reviewer">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="prompt-category">
+                        <option value="ChatGPT">ChatGPT</option>
+                        <option value="Midjourney">Midjourney</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Writing">Writing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Prompt Text</label>
+                    <textarea id="prompt-text" rows="5" required placeholder="Act as a senior Python developer. Review the following code for optimizations..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-btn" class="secondary-btn">Cancel</button>
+                    <button type="submit" class="primary-btn">Save Prompt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
